@@ -10,30 +10,28 @@ namespace triangles
   {
     static void Main(string[] args)
     {
-      var entryOne = "";
-      var entryTwo = "";
-      var entryThree = "";
-      UInt32 sideOne = 0;
-      do
+      uint sideOne = 0;
+      uint sideTwo = 0;
+      uint sideThree = 0;
+      string[] places = { "first", "second", "third" };
+      const int NUM_OF_SIDES = 3;
+      for (int i = 0; i < NUM_OF_SIDES; i++)
       {
-        Console.Write("Enter first length: ");
-        entryOne = Console.ReadLine();
-        UInt32.TryParse(entryOne, out sideOne);
-      } while (sideOne == 0);
-      UInt32 sideTwo = 0;
-      do
-      {
-        Console.Write("Enter second length: ");
-        entryTwo = Console.ReadLine();
-        UInt32.TryParse(entryTwo, out sideTwo);
-      } while (sideTwo == 0);
-      UInt32 sideThree = 0;
-      do
-      {
-        Console.Write("Enter third length: ");
-        entryThree = Console.ReadLine();
-        UInt32.TryParse(entryThree, out sideThree);
-      } while (sideThree == 0);
+        uint side = 0;
+        var parsedSide = false;
+        do
+        {
+          Console.Write($"Enter {places[i]} length: ");
+          var entry = Console.ReadLine();
+          parsedSide = UInt32.TryParse(entry, out side);
+        } while (!parsedSide);
+        if (i == 0)
+          sideOne = side;
+        if (i == 1)
+          sideTwo = side;
+        if (i == 2)
+          sideThree = side;
+      }
       //Test if triangle
       if (!isTriangle(sideOne, sideTwo, sideThree))
       {
