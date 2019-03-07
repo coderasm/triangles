@@ -10,21 +10,16 @@ namespace triangles
   {
     static void Main(string[] args)
     {
-      uint sideOne = 0;
-      uint sideTwo = 0;
-      uint sideThree = 0;
+      int sideOne = 0;
+      int sideTwo = 0;
+      int sideThree = 0;
       string[] places = { "first", "second", "third" };
       const int NUM_OF_SIDES = 3;
       for (int i = 0; i < NUM_OF_SIDES; i++)
       {
-        uint side = 0;
-        var parsedSide = false;
-        do
-        {
-          Console.Write($"Enter {places[i]} length: ");
-          var entry = Console.ReadLine();
-          parsedSide = UInt32.TryParse(entry, out side);
-        } while (!parsedSide);
+        int side = 0;
+        Console.Write($"Enter {places[i]} length: ");
+        side = int.Parse(Console.ReadLine());
         if (i == 0)
           sideOne = side;
         if (i == 1)
@@ -40,7 +35,8 @@ namespace triangles
         return;
       }
       //Sort sides
-      var sides = getSortedSides(sideOne, sideTwo, sideThree);
+      int[] sides = { sideOne, sideTwo, sideThree };
+      Array.Sort(sides);
       //Test if right triangle
       if (isRightTriangle(sides))
       {
@@ -69,42 +65,36 @@ namespace triangles
       Console.ReadKey();
     }
 
-    static bool isTriangle(UInt32 sideOne, UInt32 sideTwo, UInt32 sideThree)
+    static bool isTriangle(int sideOne, int sideTwo, int sideThree)
     {
       return sideOne + sideTwo > sideThree &&
         sideOne + sideThree > sideTwo &&
         sideTwo + sideThree > sideOne;
     }
 
-    static UInt32[] getSortedSides(uint sideOne, uint sideTwo, uint sideThree)
-    {
-      UInt32[] sideLengths = { sideOne, sideTwo, sideThree };
-      return sideLengths.OrderBy(s => s).ToArray();
-    }
-
-    static bool isRightTriangle(uint[] sides)
+    static bool isRightTriangle(int[] sides)
     {
       return Math.Pow(sides[2], 2) == Math.Pow(sides[0], 2) + Math.Pow(sides[1], 2);
     }
 
-    static bool isAcute(uint[] sides)
+    static bool isAcute(int[] sides)
     {
       return Math.Pow(sides[2], 2) < Math.Pow(sides[0], 2) + Math.Pow(sides[1], 2);
     }
 
-    static bool isObtuse(uint[] sides)
+    static bool isObtuse(int[] sides)
     {
       return Math.Pow(sides[2], 2) > Math.Pow(sides[0], 2) + Math.Pow(sides[1], 2);
     }
 
-    static bool isIsosceles(UInt32 sideOne, UInt32 sideTwo, UInt32 sideThree)
+    static bool isIsosceles(int sideOne, int sideTwo, int sideThree)
     {
       return sideOne == sideTwo ||
         sideOne == sideThree ||
         sideTwo == sideThree;
     }
 
-    static bool isEquilateral(UInt32 sideOne, UInt32 sideTwo, UInt32 sideThree)
+    static bool isEquilateral(int sideOne, int sideTwo, int sideThree)
     {
       return sideOne == sideTwo &&
         sideOne == sideThree &&
