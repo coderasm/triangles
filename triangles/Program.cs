@@ -50,7 +50,7 @@ namespace triangles
       //Test if acute triangle
       if (isObtuse(sides))
       {
-        Console.WriteLine("Is an acute triangle.");
+        Console.WriteLine("Is an obtuse triangle.");
       }
       //Test if isosceles triangle
       if (isIsosceles(sideOne, sideTwo, sideThree))
